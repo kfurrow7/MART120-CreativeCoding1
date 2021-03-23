@@ -1,3 +1,11 @@
+var headX = 250;
+var headY = 100;
+var headDirection = 1;
+
+var bodyX = 200;
+var bodyY = 185;
+var bodyDirection = 3;
+
 function setup()
 {
     createCanvas(500, 600);
@@ -11,8 +19,12 @@ function draw()
 
     // head
     fill(250, 229, 211);
-    circle(250,100,175);
-
+    circle(headX,headY,175);
+    headX+=headDirection;
+    if(headX >= 418 || headX <= 82)
+    {
+        headDirection *= -1;
+    }
     // eyes
     strokeWeight(7);
     circle(275,60,30);
@@ -31,6 +43,14 @@ function draw()
     line(325,50,360,175);
     // body
     fill(255);
+
+    fill(219, 52, 186  );
+    rect(200,bodyY,100,150);
+    bodyY += bodyDirection;
+    if(bodyY <= 0 || bodyY >= 450 )
+    {
+        bodyDirection *= -1;
+    }
 
 
   //dress
