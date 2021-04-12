@@ -18,6 +18,13 @@ var shapeY = 50;
 var shapeXSpeed;
 var shapeYSpeed;
 
+var shapeXs = [];
+var shapeYs = [];
+var diameters = [];
+
+var shapeXSpeeds = [];
+var shapeYSpeeds = [];
+
 var headX = 250;
 var headY = 100;
 var headDirection = 1;
@@ -30,12 +37,27 @@ var mouseShapeY;
 function setup()
 {
     createCanvas(800, 800);
+    shapeXs[0] = 50;
+    shapeYs[0] = 50;
+    diameters[0] = 25;
+
+    shapeXs[1] = 150;
+    shapeYs[1] = 150;
+    diameters[1] = 125;
+    
     // get a random speed when the it first starts
-    shapeXSpeed = Math.floor(Math.random() * (Math.floor(Math.random() * 7)) + 1);
-    shapeYSpeed = Math.floor(Math.random() * (Math.floor(Math.random() * 7)) + 1);
+    for (var i=0; i < 50; i++) {
+    shapeXSpeed [i] = Math.floor(Math.random() * (Math.floor(Math.random() * 7)) + 1);
+    shapeYSpeed [i] = Math.floor(Math.random() * (Math.floor(Math.random() * 7)) + 1);
+    shapeXs [i] = getRandomNumber(500);
+    shapeYs [i] = getRandomNumber(600);
+    diameters [i] = getRandomNumber(30);
+
 }
 
+createcharacter(200,350);
 
+}
 
 function draw()
 {
@@ -66,6 +88,10 @@ function draw()
     {
         headDirection *= -1;
     }
+
+//Character (200,350);
+drawcharacter();
+charcterMovement();
 
     // keys
     if(keyIsDown(i))
@@ -108,6 +134,10 @@ function draw()
     fill(13,145,14);
     circle(shapeX, shapeY, 20);
 
+    for (var i = 0; i < shapeXs.length; i++) {
+      circle(shapeXs[i], shapeYs[i], diameters[i]);
+
+
 
 
      // speed
@@ -115,24 +145,27 @@ function draw()
      shapeYSpeed = Math.floor(Math.random() * (Math.floor(Math.random() * 5)) + 1);
 
     // movement
-    shapeX += shapeXSpeed;
-    shapeY += shapeYSpeed;
+    shapeXs [i] += shapeXSpeeds[i];
+    shapeYs [i] += shapeYSpeeds[i];
 
-    if(shapeX > width)
-    {
-        shapeX = 0;
+    if (shapeXs[i] > width) {
+      shapeXs[i] = 0;
     }
-    if(shapeX < 0)
-    {
-        shapeX = width;
+
+
     }
-    if(shapeY > height)
-    {
-        shapeY = 0;
+    if(shapeXs[i] < 0) {
+      shapeXs[i] = width;
+
+
     }
-    if(shapeY < 0)
-    {
-        shapeY = height;
+    if(shapeYs[i] > height) {
+      shapeYs[i] = 0;
+
+    }
+    if(shapeYs[i] < 0) {
+      shapeYs[i] = height;
+
     }
 
     // circle and exit
@@ -153,4 +186,18 @@ function mouseClicked()
 {
     mouseShapeX = mouseX;
     mouseShapeY = mouseY;
+}
+
+}
+function createcharacter(x,y)
+{
+  characterX = x;
+  characterY = y;
+  console.log(characterX);
+}
+
+function drawcharacter()
+{
+    fill(23,40,123);
+    circle(characterX,characterY,25);
 }
